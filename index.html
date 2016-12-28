@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="jquery-3.1.1.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
     <style>
         .glyphicon{
             font-size: 30px;
@@ -32,7 +33,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-10 col-lg-10">
             <div class="well-lg">
 
              <article>
@@ -44,37 +45,69 @@
 
 
             </article><hr>
+            <div class="row">
+            <div class="col-md-4 col-lg-5 col-xs-5"> <span class="glyphicon glyphicon-heart like"></span> </div>
+            <div class="col-md-4 col-lg-5 col-xs-5"> <span class="glyphicon glyphicon-thumbs-down dislike "></span> </div>
+            </div>
 
-            <div class="col-sm-4"> <span class="glyphicon glyphicon-heart like"></span> </div>
-            <div class="col-sm-4"> <span class="glyphicon glyphicon-thumbs-down dislike "></span> </div>
-            <!--<div class="col-sm-4"> <h5 id="count">1</h5></div>-->
+
         </div>
+
         </div>
+
     </div>
+
+
+    <div class="row">
+
+        <div class="col-md-10 col-lg-10">
+            <div class="well-lg">
+
+                <article>
+                    <img src="images/article1.jpg" alt="Article Image"  class="img-responsive"><br>
+
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor, nulla nec mollis tempus, eros lacus pharetra
+                    erat, eget commodo mi dolor fringilla ante. Mauris commodo orci eget dolor facilisis tincidunt. Sed tincidunt nunc                      eu est convallis, in feugiat elit pulvinar. Pellentesque id venenatis felis. Phasellus mauris felis, dictum in                          molestie quis, mollis quis velit. Fusce quam leo, egestas in ornare a, dignissim ac mauris. Aenean faucibus urna a                      odio rutrum, ac finibus justo pretium. Morbi rhoncus porttitor arcu ut varius. Vestibulum ultrices id urna quis                         mollis. Fusce tincidunt   turpis in neque pellentesque, ac tincidunt nunc varius. Proin ut ullamcorper leo.
+
+
+
+                </article><hr>
+                <div class="row">
+                    <div class="col-md-4 col-lg-5 col-xs-5"> <span class="glyphicon glyphicon-heart like"></span> </div>
+                    <div class="col-md-4 col-lg-5 col-xs-5"> <span class="glyphicon glyphicon-thumbs-down dislike "></span> </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 </div>
 
 <script>
     $(document).ready(function () {
 
-        var count = parseInt($("#count").text());
+
         $("article").on("swiperight",function () {
-            $(".glyphicon-heart").addClass("liked");
-            $(".like").unbind("click");
+            $(this).addClass("liked");
+            $(this).unbind("swiperight");
 
            // count++;
            // $("#count").text(count);
+         });
 
 
-        });
-
-        $("article").on("swipeleft",function () {
-            $(".like").bind("click", function () {
+        $(".dislike").on("swipeleft",function () {
+            $(".like").bind("swiperight", function () {
                 $(".glyphicon-thumbs-down").removeClass("disliked");
-                $(".glyphicon-heart").addClass("liked");
-                $(".like").unbind("click");
+                $(this).addClass("liked");
+                $(this).unbind("swipeleft");
 
             });
-            $(".dislike").addClass("disliked");
+            $(this).addClass("disliked");
             $(".glyphicon-heart").removeClass("liked");
             //count--;
             if (count < 0){count = 0;}
