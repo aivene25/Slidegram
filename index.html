@@ -12,8 +12,14 @@
         .glyphicon{
             font-size: 30px;
         }
-        .like{
+        .glyphicon-heart{
+            color: darkgray;
+        }
+        .liked{
              color: red;
+        }
+        .disliked{
+            color: #5bc0de;
         }
         h5{
             font-size: 20px;
@@ -28,8 +34,9 @@
 
         <div class="col-md-4">
             <div class="well-lg">
-            <img src="images/article1.jpg" alt="Article Image"  class="img-responsive"><br>
+
              <article>
+                 <img src="images/article1.jpg" alt="Article Image"  class="img-responsive"><br>
 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor, nulla nec mollis tempus, eros lacus pharetra
                 erat, eget commodo mi dolor fringilla ante. Mauris commodo orci eget dolor facilisis tincidunt. Sed tincidunt nunc                      eu est convallis, in feugiat elit pulvinar. Pellentesque id venenatis felis. Phasellus mauris felis, dictum in                          molestie quis, mollis quis velit. Fusce quam leo, egestas in ornare a, dignissim ac mauris. Aenean faucibus urna a                      odio rutrum, ac finibus justo pretium. Morbi rhoncus porttitor arcu ut varius. Vestibulum ultrices id urna quis                         mollis. Fusce tincidunt   turpis in neque pellentesque, ac tincidunt nunc varius. Proin ut ullamcorper leo.
@@ -40,7 +47,7 @@
 
             <div class="col-sm-4"> <span class="glyphicon glyphicon-heart like"></span> </div>
             <div class="col-sm-4"> <span class="glyphicon glyphicon-thumbs-down dislike "></span> </div>
-            <div class="col-sm-4"> <h5 id="count">1</h5></div>
+            <!--<div class="col-sm-4"> <h5 id="count">1</h5></div>-->
         </div>
         </div>
     </div>
@@ -48,19 +55,31 @@
 
 <script>
     $(document).ready(function () {
-        $(".like").click(function () {
-            $(".glyphicon-thumbs-up").addClass("like");
 
-            var count = parseInt($("#count").text());
-            count++;
-            $("#count").text(count);
+        var count = parseInt($("#count").text());
+        $("article").on("swiperight",function () {
+            $(".glyphicon-heart").addClass("liked");
+            $(".like").unbind("click");
+
+           // count++;
+           // $("#count").text(count);
+
 
         });
 
-        $(".dislike").click(function () {
+        $(".article").on("swipeleft",function () {
+            $(".like").bind("click", function () {
+                $(".glyphicon-thumbs-down").removeClass("disliked");
+                $(".glyphicon-heart").addClass("liked");
+                $(".like").unbind("click");
 
-            var count = parseInt($("#count").text());
-            count--;
+
+             //   count++;
+               // $("#count").text(count);
+            });
+            $(".dislike").addClass("disliked");
+            $(".glyphicon-heart").removeClass("liked");
+            //count--;
             if (count < 0){count = 0;}
             $("#count").text(count);
 
